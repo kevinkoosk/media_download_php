@@ -20,3 +20,11 @@ So I had to change line 37 to reflect "go/download/" instead of just "download".
 Have fun with it.
 
 Credits: Thank you, ChatGPT for helping me with this script.
+
+# media_download2.php
+
+This file allows you to input 3 URLs, to be processed together.
+
+May be useful if you have a number of files to download.
+
+If you like, you can even modify it to accept 10 URLs :-)
