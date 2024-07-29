@@ -2,7 +2,7 @@
 // Function to check if the URL is valid and the file is either MP4 or MP3
 function isValidMediaFile($url) {
     // Get headers of the file
-    $headers = get_headers($url, 1);
+    $headers = @get_headers($url, 1);
     if ($headers && strpos($headers[0], '200')) {
         $contentType = isset($headers['Content-Type']) ? $headers['Content-Type'] : '';
         // Check if the content type is either video/mp4 or audio/mpeg (MP3)
@@ -19,8 +19,12 @@ function downloadMediaFile($url) {
         mkdir($downloadDir, 0777, true);
     }
 
-    // Generate a unique name for the file
+    // Generate a unique name for the file using basename and parse_url
     $fileName = basename(parse_url($url, PHP_URL_PATH));
+    if (!$fileName) {
+        // If the URL path does not provide a filename, create a unique name
+        $fileName = uniqid('media_', true) . '.mp4';
+    }
     $downloadPath = $downloadDir . '/' . $fileName;
 
     // Download the file
